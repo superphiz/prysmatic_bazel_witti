@@ -49,10 +49,10 @@ else
 fi
 
 #launch the stats monitor
-$HOME/prysmatic_bazel/eth2stats.sh
+$HOME/prysmatic_bazel_witti/eth2stats.sh
 
 #update cron so eth2stats reloads every hour to keep it updated
-echo "@daily /home/`id -un -- 1000`/prysmatic_bazel/eth2stats.sh" >> /var/spool/cron/crontabs/`id -un -- 1000`
+echo "@daily /home/`id -un -- 1000`/prysmatic_bazel_witti/eth2stats.sh" >> /var/spool/cron/crontabs/`id -un -- 1000`
 
 #add ethereum repository for geth
 sudo add-apt-repository -y ppa:ethereum/ethereum
@@ -92,10 +92,10 @@ cd $HOME && git clone https://github.com/prysmaticlabs/prysm
 cd $HOME/prysm && git checkout witti
 
 #adding screen start jobs at boot
-sudo cp $HOME/prysmatic_bazel/rc.local /etc/
+sudo cp $HOME/prysmatic_bazel_witti/rc.local /etc/
 
 #create a key pair just to get things started.
-cd $HOME && $HOME/prysmatic_bazel/create_wallet.sh
+cd $HOME && $HOME/prysmatic_bazel_witti/create_wallet.sh
 
 #create a visible symlink to the keystore directory
 ln -s $HOME/.eth2validators $HOME/eth2validators
@@ -107,9 +107,9 @@ sudo chown -R root:root /home/`id -un -- 1000`/.cache/bazel/_bazel_root
 sudo chown -R `id -un -- 1000`:`id -un -- 1000` /home/`id -un -- 1000`/.cache/bazel
 
 #starting screen jobs now
-/bin/su `id -un -- 1000` -c "/usr/bin/screen -dmS beacon-screen  bash -c '/home/`id -un -- 1000`/prysmatic_bazel/beacon_chain_restarter.sh; exec bash'"
-/bin/su `id -un -- 1000` -c "/usr/bin/screen -dmS validator-screen  bash -c '/home/`id -un -- 1000`/prysmatic_bazel/validator_restarter.sh; exec bash'"
-/bin/su `id -un -- 1000` -c "/usr/bin/screen -dmS geth  bash -c '/home/`id -un -- 1000`/prysmatic_bazel/launch_geth.sh; exec bash'"
+/bin/su `id -un -- 1000` -c "/usr/bin/screen -dmS beacon-screen  bash -c '/home/`id -un -- 1000`/prysmatic_bazel_witti/beacon_chain_restarter.sh; exec bash'"
+/bin/su `id -un -- 1000` -c "/usr/bin/screen -dmS validator-screen  bash -c '/home/`id -un -- 1000`/prysmatic_bazel_witti/validator_restarter.sh; exec bash'"
+/bin/su `id -un -- 1000` -c "/usr/bin/screen -dmS geth  bash -c '/home/`id -un -- 1000`/prysmatic_bazel_witti/launch_geth.sh; exec bash'"
 
 
 #still encountering a permission bug, just throwing potential solutions at it.

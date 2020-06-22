@@ -1,3 +1,3 @@
 #!/bin/bash
 
-geth --goerli
+geth --goerli --light
