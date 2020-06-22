@@ -7,7 +7,7 @@ do
 	cd $HOME/prysm && $HOME/bin/bazel build //beacon-chain:beacon-chain
 	cd $HOME/prysm && unbuffer $HOME/bin/bazel run //beacon-chain -- \
 		--witti-testnet \
-		--http-web3provider=$HOME/.ethereum/goerli/geth.ipc
+                --http-web3provider=http://localhost:8545/ \
 		--datadir=$HOME/prysm \
 		--p2p-host-ip=$(curl -s v4.ident.me) \
 		--p2p-max-peers=100 \
